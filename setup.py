@@ -7,8 +7,6 @@ VERSION = '0.1'
 import os
 from setuptools import setup, find_packages
 
-# You should review the below so that it seems correct. install_requires
-# especially.
 setup(
         namespace_packages = ['tiddlywebplugins'],
         name = NAME,
