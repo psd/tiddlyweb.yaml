@@ -18,5 +18,5 @@ setup(
         packages = find_packages(exclude='test'),
         author_email = AUTHOR_EMAIL,
         platforms = 'Posix; MacOS X; Windows',
-        install_requires = ['setuptools', 'pyyaml', 'tiddlyweb'],
+        install_requires = ['setuptools', 'yyyaml', 'tiddlyweb'],
         )
