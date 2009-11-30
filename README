@@ -1,0 +1,21 @@
+Exchange TiddlyWeb resources in the YAML representation.
+
+    http://yaml.org
+
+YAML is returned following a request for the text/yaml media type, 
+or by appending a .yaml suffix before the query portion of a TiddlyWeb URI.
+
+Resources may be created and modified by sending YAML to a TiddlyWeb
+recipe, bag or tiddler URI using the text/yaml media type.
+
+To use this code install the package and and add 'tiddlywebplugins.yaml'
+to system_plugins in the tiddlywebconfig.py of your TiddlyWeb instance:
+
+config = {
+    'system_plugins': ['tiddlywebplugins.yaml'],
+}
+
+Created by Paul Downey, <psd@osmosoft.com>.
+http://blog.whatfettle.com
+
+This package is licensed under the same terms as TiddlyWeb itself.
