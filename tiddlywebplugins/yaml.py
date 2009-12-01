@@ -21,6 +21,12 @@ class Serialization(SerializationInterface):
     def dump(self, o):
         return pyyaml.safe_dump(o, encoding=None, default_flow_style=False, allow_unicode=True)
 
+    def list_recipes(self, recipes):
+        """
+        Create a YAML list of recipe names
+        """
+        return self.dump([recipe.name for recipe in recipes])
+
     def list_bags(self, bags):
         """
         Create a YAML list of bag names
