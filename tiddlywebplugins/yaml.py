@@ -19,7 +19,7 @@ class Serialization(SerializationInterface):
         self._bag_perms_cache = {}
 
     def dump(self, o):
-        return pyyaml.safe_dump(o, default_flow_style=False)
+        return pyyaml.safe_dump(o, encoding=None, default_flow_style=False, allow_unicode=True)
 
     def list_bags(self, bags):
         """
