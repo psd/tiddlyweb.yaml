@@ -18,18 +18,17 @@ class Serialization(SerializationInterface):
         SerializationInterface.__init__(self, environ)
         self._bag_perms_cache = {}
 
-    def dump(self, o):
+    def _dump(self, o):
         return pyyaml.safe_dump(o, encoding=None, default_flow_style=False, allow_unicode=True)
 
     def list_recipes(self, recipes):
         """
         Create a YAML list of recipe names
         """
-        return self.dump([recipe.name for recipe in recipes])
+        return self._dump([recipe.name for recipe in recipes])
 
     def list_bags(self, bags):
         """
         Create a YAML list of bag names
         """
-        return self.dump([bag.name for bag in bags])
-
+        return self._dump([bag.name for bag in bags])
