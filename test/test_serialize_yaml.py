@@ -50,4 +50,11 @@ def test_list_tiddlers_as_yaml():
     assert o[1]['tags'] == []
     assert o[1]['revision'] == 0
 
+def test_recipe_as_yaml():
+    recipe = Recipe('other')
+    recipe.set_recipe([('foo', 'bar')])
+    serializer.object = recipe
+    string = serializer.to_string()
+    assert string.startswith(u"desc: ''\n")
+    assert u"\nrecipe:\n- - foo\n  - bar\n" in string
 

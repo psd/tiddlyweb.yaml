@@ -52,3 +52,14 @@ class Serialization(SerializationInterface):
         return dump([self._tiddler_dict(tiddler) for
             tiddler in bag.gen_tiddlers()])
 
+    def recipe_as(self, recipe):
+        """
+        Create a YAML representation of a recipe
+        """
+        policy = recipe.policy
+        policy_dict = {}
+        for key in Policy.attributes:
+            policy_dict[key] = getattr(policy, key)
+        return dump(dict(desc=recipe.desc, policy=policy_dict,
+            recipe=recipe.get_recipe()))
+
