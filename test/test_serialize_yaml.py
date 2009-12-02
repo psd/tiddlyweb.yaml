@@ -82,3 +82,15 @@ def test_recipe_as_and_from_yaml():
     other_string = serializer.to_string()
 
     assert string == other_string
+
+def test_bag_as_yaml(): 
+    bag = Bag('test bag')
+    tiddlers = [Tiddler('tiddler number ' + str(name)) for name in xrange(2)]
+    bag.desc = 'a bag of tiddlers'
+    bag.policy.manage = ['NONE']
+    bag.policy.delete = ['go away']
+    serializer.object = bag
+    string = serializer.to_string()
+    assert string.startswith(u'desc: a bag of tiddlers\n')
+    assert u"\n  delete:\n  - go away\n" in string
+    assert u"\n  manage:\n  - NONE\n" in string

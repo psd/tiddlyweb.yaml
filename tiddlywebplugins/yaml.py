@@ -78,3 +78,18 @@ class Serialization(SerializationInterface):
             for key, value in info['policy'].items():
                 recipe.policy.__setattr__(key, value)
         return recipe
+
+    def bag_as(self, bag):
+        """
+        Create a JSON dictionary representing
+        a Bag and Policy.
+        """
+        policy = bag.policy
+        policy_dict = {}
+        for key in Policy.attributes:
+            policy_dict[key] = getattr(policy, key)
+        info = dict(policy=policy_dict, desc=bag.desc)
+        return dump(info)
+    
+
+
