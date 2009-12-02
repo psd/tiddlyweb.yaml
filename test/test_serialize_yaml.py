@@ -49,3 +49,5 @@ def test_list_tiddlers_as_yaml():
     assert re.match("^\d{14}$", o[0]['modified'])
     assert o[1]['tags'] == []
     assert o[1]['revision'] == 0
+
+
