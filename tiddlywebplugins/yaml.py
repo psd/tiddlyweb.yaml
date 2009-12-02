@@ -36,29 +36,20 @@ class Serialization(SerializationInterface):
         self._bag_perms_cache = {}
 
     def list_recipes(self, recipes):
-        """
-        Create a YAML list of recipe names
-        """
+        """Creates a YAML representation of a list of recipe names."""
         return dump([recipe.name for recipe in recipes])
 
     def list_bags(self, bags):
-        """
-        Create a YAML list of bag names
-        """
+        """Creates a YAML representation of a list of bag names."""
         return dump([bag.name for bag in bags])
 
     def list_tiddlers(self, bag):
-        """
-        List the tiddlers in a bag as YAML
-        using the form described by self._tiddler_dict
-        """
+        """Creates a YAML representation of the list of tiddlers in a bag."""
         return dump([self._tiddler_dict(tiddler) for
             tiddler in bag.gen_tiddlers()])
 
     def recipe_as(self, recipe):
-        """
-        Create a YAML representation of a recipe
-        """
+        """Creates a YAML representation of a recipe."""
         policy = recipe.policy
         policy_dict = {}
         for key in Policy.attributes:
@@ -67,9 +58,7 @@ class Serialization(SerializationInterface):
             recipe=recipe.get_recipe()))
 
     def as_recipe(self, recipe, input_string):
-        """
-        Create a recipe from a YAML representation
-        """
+        """Creates a recipe from a YAML representation."""
         info = load(input_string)
         recipe.set_recipe(info.get('recipe', []))
         recipe.desc = info.get('desc', '')
@@ -80,16 +69,10 @@ class Serialization(SerializationInterface):
         return recipe
 
     def bag_as(self, bag):
-        """
-        Create a JSON dictionary representing
-        a Bag and Policy.
-        """
+        """Creates a YAML representation of a bag."""
         policy = bag.policy
         policy_dict = {}
         for key in Policy.attributes:
             policy_dict[key] = getattr(policy, key)
         info = dict(policy=policy_dict, desc=bag.desc)
         return dump(info)
-    
-
-
