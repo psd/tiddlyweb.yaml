@@ -52,20 +52,25 @@ def test_list_tiddlers_as_yaml():
 
 def test_recipe_as_yaml():
     recipe = Recipe('other')
-    recipe.set_recipe([('foo', 'bar')])
+    recipe.policy.manage = ['tinker']
+    recipe.policy.read = ['tailor']
+    recipe.policy.create = ['soldier']
+    recipe.policy.delete = ['beggar']
+    recipe.policy.owner = 'thief'
+    recipe.set_recipe([('plum', 'fig')])
     serializer.object = recipe
     string = serializer.to_string()
     assert string.startswith(u"desc: ''\n")
-    assert u"\nrecipe:\n- - foo\n  - bar\n" in string
+    assert u"\n  manage:\n  - tinker\n" in string
+    assert u"\n  read:\n  - tailor\n" in string
+    assert u"\n  create:\n  - soldier\n" in string
+    assert u"\n  delete:\n  - beggar\n" in string
+    assert u"\n  owner: thief\n" in string
+    assert u"\nrecipe:\n- - plum\n  - fig\n" in string
 
-def test_recipe_yaml_roundtrip():
+def test_recipe_as_and_from_yaml():
     recipe = Recipe('other')
     recipe.set_recipe([('bagbuzz', '')])
-    recipe.policy.manage = ['a']
-    recipe.policy.read = ['b']
-    recipe.policy.create = ['c']
-    recipe.policy.delete = ['d']
-    recipe.policy.owner = 'e'
     serializer.object = recipe
     string = serializer.to_string()
 

@@ -23,6 +23,9 @@ def init(config):
 def dump(o):
     return pyyaml.safe_dump(o, encoding=None, default_flow_style=False, allow_unicode=True)
 
+def load(s):
+    return pyyaml.load(s)
+
 class Serialization(SerializationInterface):
     """
     Access TiddlyWeb resources using the YAML representation.
@@ -63,3 +66,15 @@ class Serialization(SerializationInterface):
         return dump(dict(desc=recipe.desc, policy=policy_dict,
             recipe=recipe.get_recipe()))
 
+    def as_recipe(self, recipe, input_string):
+        """
+        Create a recipe from a YAML representation
+        """
+        info = load(input_string)
+        recipe.set_recipe(info.get('recipe', []))
+        recipe.desc = info.get('desc', '')
+        if info.get('policy', {}):
+            recipe.policy = Policy()
+            for key, value in info['policy'].items():
+                recipe.policy.__setattr__(key, value)
+        return recipe
