@@ -58,3 +58,22 @@ def test_recipe_as_yaml():
     assert string.startswith(u"desc: ''\n")
     assert u"\nrecipe:\n- - foo\n  - bar\n" in string
 
+def test_recipe_yaml_roundtrip():
+    recipe = Recipe('other')
+    recipe.set_recipe([('bagbuzz', '')])
+    recipe.policy.manage = ['a']
+    recipe.policy.read = ['b']
+    recipe.policy.create = ['c']
+    recipe.policy.delete = ['d']
+    recipe.policy.owner = 'e'
+    serializer.object = recipe
+    string = serializer.to_string()
+
+    other_recipe = Recipe('other')
+    serializer.object = other_recipe
+    serializer.from_string(string)
+
+    serializer.object = other_recipe
+    other_string = serializer.to_string()
+
+    assert string == other_string
