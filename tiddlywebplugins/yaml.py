@@ -9,7 +9,7 @@ from tiddlyweb.model.bag import Bag
 from tiddlyweb.model.policy import Policy
 from tiddlyweb.serializations import SerializationInterface
 
-# temporarily use the json base class for fat/skinny tiddler selection
+# temporarily use the json serializer as a base class for fat/skinny tiddler selection
 from tiddlyweb.serializations.json import Serialization as SerializationInterface
 
 __version__ = "0.1"
@@ -27,9 +27,7 @@ def load(s):
     return pyyaml.load(s)
 
 class Serialization(SerializationInterface):
-    """
-    Access TiddlyWeb resources using the YAML representation.
-    """
+    """Access TiddlyWeb resources using the YAML representation."""
 
     def __init__(self, environ=None):
         SerializationInterface.__init__(self, environ)
@@ -76,3 +74,13 @@ class Serialization(SerializationInterface):
             policy_dict[key] = getattr(policy, key)
         info = dict(policy=policy_dict, desc=bag.desc)
         return dump(info)
+
+    def as_bag(self, bag, input_string):
+        """Creates a bag from a YAML representation."""
+        info = simplejson.loads(input_string)
+        if info.get('policy', {}):
+            bag.policy = Policy()
+            for key, value in info['policy'].items():
+                bag.policy.__setattr__(key, value)
+        bag.desc = info.get('desc', '')
+        return bag
