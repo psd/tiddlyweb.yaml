@@ -89,7 +89,7 @@ class Serialization(SerializationInterface):
         item.desc = info.get('desc', '')
 
     def _tiddler_dict(self, tiddler):
-        """Select fields from a tiddler to create a dictonary."""
+        """Selects fields from a tiddler to create a dictonary."""
         unwanted_keys = ['text', 'store']
         wanted_keys = [attribute for attribute in tiddler.slots if
                 attribute not in unwanted_keys]
@@ -107,13 +107,13 @@ class Serialization(SerializationInterface):
 
     def _tiddler_permissions(self, tiddler):
         """
-        Make a list of the permissions the current user has
+        Makes a list of the permissions the current user has
         on this tiddler.
         """
 
         def _read_bag_perms(environ, tiddler):
             """
-            Read the permissions for the bag containing
+            Reads the permissions for the bag containing
             this tiddler.
             """
             perms = []
