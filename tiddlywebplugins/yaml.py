@@ -86,7 +86,6 @@ class Serialization(SerializationInterface):
             item.policy = Policy()
             for key, value in info['policy'].items():
                 item.policy.__setattr__(key, value)
-        item.desc = info.get('desc', '')
 
     def _tiddler_dict(self, tiddler):
         """Selects fields from a tiddler to create a dictonary."""

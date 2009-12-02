@@ -94,3 +94,18 @@ def test_bag_as_yaml():
     assert string.startswith(u'desc: a bag of tiddlers\n')
     assert u"\n  delete:\n  - go away\n" in string
     assert u"\n  manage:\n  - NONE\n" in string
+
+def test_bag_as_and_from_yaml():
+    bag = Bag('other')
+    serializer.object = bag
+    string = serializer.to_string()
+
+    other_bag = Bag('other')
+    serializer.object = other_bag
+    serializer.from_string(string)
+
+    serializer.object = other_bag
+    other_string = serializer.to_string()
+
+    assert string == other_string
+
