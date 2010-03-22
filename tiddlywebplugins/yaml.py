@@ -18,10 +18,10 @@ def init(config):
 class Serialization(SerializationInterface):
     """Access TiddlyWeb resources using the YAML representation."""
 
-    def dump(self, object):
+    def dump(self, object, type):
         """Dump a dictionary object to a YAML string."""
         return pyyaml.safe_dump(object, encoding=None, default_flow_style=False, allow_unicode=True)
 
-    def load(self, input_string):
+    def load(self, input_string, type):
         """Load a dictionary object from a YAML string."""
         return pyyaml.load(input_string)

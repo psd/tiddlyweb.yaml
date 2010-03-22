@@ -2,7 +2,7 @@ AUTHOR = 'Paul Downey'
 AUTHOR_EMAIL = 'paul.downey@whatfettle.com'
 NAME = 'tiddlywebplugins.yaml'
 DESCRIPTION = 'TiddlyWeb YAML Serializer'
-VERSION = '0.1'
+VERSION = '0.2'
 
 import os
 from setuptools import setup, find_packages

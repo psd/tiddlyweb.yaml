@@ -17,5 +17,5 @@ dist:
 
 upload: clean pypi
 
-pypi:
+release:
 	python setup.py sdist upload
